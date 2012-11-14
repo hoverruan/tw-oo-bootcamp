@@ -26,4 +26,8 @@ public class ParkingLot {
         }
         availableParkingPoints--;
     }
+
+    public void unpark(Car car) {
+        availableParkingPoints++;
+    }
 }

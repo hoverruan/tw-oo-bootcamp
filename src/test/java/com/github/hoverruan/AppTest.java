@@ -11,6 +11,7 @@ import static org.junit.Assert.assertThat;
  */
 public class AppTest {
 
+    private ParkingLot parkingLot;
     private int totalParkingPoints;
 
     /**
@@ -19,12 +20,12 @@ public class AppTest {
     @Before
     public void setUp() {
         totalParkingPoints = 100;
+        parkingLot = new ParkingLot(totalParkingPoints);
     }
 
     @Test
     public void shouldDecreaseTheAvailableParkingLotBy1WhenOneCarLeft() throws NoAvailableParkingPointException {
         // given
-        ParkingLot parkingLot = new ParkingLot(totalParkingPoints);
 
         // when
         parkingLot.park(new Car());
@@ -36,10 +37,21 @@ public class AppTest {
     @Test(expected = NoAvailableParkingPointException.class)
     public void shouldRefuseIfNoAvailableParkingPointLeft() throws NoAvailableParkingPointException {
         // given
-        ParkingLot parkingLot = new ParkingLot(totalParkingPoints);
         parkingLot.setAvailableParkingPoints(0);
 
         // when
         parkingLot.park(new Car());
+    }
+
+    @Test
+    public void shouldIncreaseTheAvailableParkingLotBy1WhenOneCarEnter() {
+        // given
+        parkingLot.setAvailableParkingPoints(totalParkingPoints - 1);
+
+        // when
+        parkingLot.unpark(new Car());
+
+        // then
+        assertThat(parkingLot.getAvailableParkingPoints(), is(totalParkingPoints));
     }
 }
