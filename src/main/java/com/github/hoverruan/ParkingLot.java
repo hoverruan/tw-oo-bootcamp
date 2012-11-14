@@ -12,11 +12,18 @@ public class ParkingLot {
         this.availableParkingPoints = totalParkingPoints;
     }
 
+    public void setAvailableParkingPoints(int availableParkingPoints) {
+        this.availableParkingPoints = availableParkingPoints;
+    }
+
     public int getAvailableParkingPoints() {
         return availableParkingPoints;
     }
 
-    public void park(Car car) {
+    public void park(Car car) throws NoAvailableParkingPointException {
+        if (availableParkingPoints == 0) {
+            throw new NoAvailableParkingPointException();
+        }
         availableParkingPoints--;
     }
 }
