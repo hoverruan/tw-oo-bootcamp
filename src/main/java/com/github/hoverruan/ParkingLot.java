@@ -5,15 +5,9 @@ package com.github.hoverruan;
  */
 public class ParkingLot {
     private int availableParkingPoints;
-    private int totalParkingPoints;
 
     public ParkingLot(int totalParkingPoints) {
-        this.totalParkingPoints = totalParkingPoints;
         this.availableParkingPoints = totalParkingPoints;
-    }
-
-    public void setAvailableParkingPoints(int availableParkingPoints) {
-        this.availableParkingPoints = availableParkingPoints;
     }
 
     public int getAvailableParkingPoints() {
@@ -27,7 +21,7 @@ public class ParkingLot {
         availableParkingPoints--;
     }
 
-    public void unpark(Car car) {
+    public void pick(Car car) {
         availableParkingPoints++;
     }
 }

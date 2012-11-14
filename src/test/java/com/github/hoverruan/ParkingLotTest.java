@@ -9,18 +9,15 @@ import static org.junit.Assert.assertThat;
 /**
  * Unit test for simple App.
  */
-public class AppTest {
+public class ParkingLotTest {
+
+    private static final int TOTAL_PARKING_POINTS = 100;
 
     private ParkingLot parkingLot;
-    private int totalParkingPoints;
 
-    /**
-     * Rigourous Test :-)
-     */
     @Before
     public void setUp() {
-        totalParkingPoints = 100;
-        parkingLot = new ParkingLot(totalParkingPoints);
+        parkingLot = new ParkingLot(TOTAL_PARKING_POINTS);
     }
 
     @Test
@@ -31,27 +28,28 @@ public class AppTest {
         parkingLot.park(new Car());
 
         // then
-        assertThat(parkingLot.getAvailableParkingPoints(), is(totalParkingPoints - 1));
+        assertThat(parkingLot.getAvailableParkingPoints(), is(TOTAL_PARKING_POINTS - 1));
     }
 
     @Test(expected = NoAvailableParkingPointException.class)
     public void shouldRefuseIfNoAvailableParkingPointLeft() throws NoAvailableParkingPointException {
         // given
-        parkingLot.setAvailableParkingPoints(0);
+        parkingLot = new ParkingLot(1);
+        parkingLot.park(new Car());
 
         // when
         parkingLot.park(new Car());
     }
 
     @Test
-    public void shouldIncreaseTheAvailableParkingLotBy1WhenOneCarEnter() {
+    public void shouldIncreaseTheAvailableParkingLotBy1WhenOneCarEnter() throws NoAvailableParkingPointException {
         // given
-        parkingLot.setAvailableParkingPoints(totalParkingPoints - 1);
+        parkingLot.park(new Car());
 
         // when
-        parkingLot.unpark(new Car());
+        parkingLot.pick(new Car());
 
         // then
-        assertThat(parkingLot.getAvailableParkingPoints(), is(totalParkingPoints));
+        assertThat(parkingLot.getAvailableParkingPoints(), is(TOTAL_PARKING_POINTS));
     }
 }
