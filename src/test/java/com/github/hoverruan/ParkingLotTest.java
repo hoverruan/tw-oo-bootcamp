@@ -6,9 +6,6 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Unit test for simple App.
- */
 public class ParkingLotTest {
 
     private static final int TOTAL_PARKING_POINTS = 100;

@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.hoverruan</groupId>
-  <artifactId>oo-bootcamp</artifactId>
+  <artifactId>tw-oo-bootcamp</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>oo-bootcamp</name>
-  <url>http://maven.apache.org</url>
+  <name>tw-oo-bootcamp</name>
+  <url>https://github.com/hoverruan/tw-oo-bootcamp</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
