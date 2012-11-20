@@ -20,14 +20,16 @@ public class ParkingLotSetTest {
     }
 
     @Test
-    public void couldParkIfOneParkingLotHasAvailableParkingPoints() throws NoAvailableParkingPointException {
+    public void refuseParkRequestIfNoParkingLotHasAvailableParkingPoints() throws NoAvailableParkingPointException {
         int totalParkingPointsPerParkingLot = 1;
+
         ParkingLot parkingLotA = new ParkingLot(totalParkingPointsPerParkingLot);
         parkingLotA.park(new Car());
-        ParkingLotSet parkingLotSet = new ParkingLotSet(parkingLotA,
-                new ParkingLot(totalParkingPointsPerParkingLot));
 
-        parkingLotSet.park(new Car());
+        ParkingLot parkingLotB = new ParkingLot(totalParkingPointsPerParkingLot);
+        parkingLotB.park(new Car());
+
+        ParkingLotSet parkingLotSet = new ParkingLotSet(parkingLotA, parkingLotB);
 
         assertThat(parkingLotSet.hasAvailableParkingPoints(), is(false));
     }
