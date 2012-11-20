@@ -10,13 +10,15 @@ public class ParkingLotSet {
         this.parkingLotList = parkingLotList;
     }
 
-    public void park(Car car) throws NoAvailableParkingPointException {
+    public ParkingTicket park(Car car) throws NoAvailableParkingPointException {
         for (ParkingLot parkingLot : parkingLotList) {
             if (parkingLot.hasAvailableParkingPoints()) {
                 parkingLot.park(car);
-                return;
+                return new ParkingTicket(car);
             }
         }
+
+        return null;
     }
 
     public boolean hasAvailableParkingPoints() {

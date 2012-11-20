@@ -1,6 +1,7 @@
 package com.github.hoverruan;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class ParkingLotSetTest {
     }
 
     @Test
-    public void refuseParkRequestIfNoParkingLotHasAvailableParkingPoints() throws NoAvailableParkingPointException {
+    public void shouldRefuseParkRequestIfNoParkingLotHasAvailableParkingPoints() throws NoAvailableParkingPointException {
         int totalParkingPointsPerParkingLot = 1;
 
         ParkingLot parkingLotA = new ParkingLot(totalParkingPointsPerParkingLot);
@@ -32,5 +33,15 @@ public class ParkingLotSetTest {
         ParkingLotSet parkingLotSet = new ParkingLotSet(parkingLotA, parkingLotB);
 
         assertThat(parkingLotSet.hasAvailableParkingPoints(), is(false));
+    }
+
+    @Test
+    public void shouldReturnParkingTicketIfCouldPark() throws NoAvailableParkingPointException {
+        int totalParkingPointsPerParkingLot = 1;
+
+        ParkingLotSet parkingLotSet = new ParkingLotSet(new ParkingLot(totalParkingPointsPerParkingLot), new ParkingLot(totalParkingPointsPerParkingLot));
+
+        ParkingTicket ticket = parkingLotSet.park(new Car());
+        assertThat(ticket, is(notNullValue()));
     }
 }
