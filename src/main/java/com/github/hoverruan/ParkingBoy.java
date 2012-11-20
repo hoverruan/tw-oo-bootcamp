@@ -3,22 +3,24 @@ package com.github.hoverruan;
 /**
  * @author Hover Ruan
  */
-public class ParkingLotSet {
+public class ParkingBoy {
     private ParkingLot[] parkingLotList;
 
-    public ParkingLotSet(ParkingLot... parkingLotList) {
+    public ParkingBoy(ParkingLot... parkingLotList) {
         this.parkingLotList = parkingLotList;
     }
 
     public ParkingTicket park(Car car) throws NoAvailableParkingPointException {
         for (ParkingLot parkingLot : parkingLotList) {
-            if (parkingLot.hasAvailableParkingPoints()) {
+            try {
                 parkingLot.park(car);
                 return new ParkingTicket(car);
+            } catch (NoAvailableParkingPointException e) {
+                // try next
             }
         }
 
-        return null;
+        throw new NoAvailableParkingPointException();
     }
 
     public boolean hasAvailableParkingPoints() {

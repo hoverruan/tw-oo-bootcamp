@@ -8,16 +8,16 @@ import org.junit.Test;
 /**
  * @author Hover Ruan
  */
-public class ParkingLotSetTest {
+public class ParkingBoyTest {
     @Test
     public void couldParkIfAnyParkingLotHasAvailableParkingPoints() throws NoAvailableParkingPointException {
         int totalParkingPointsPerParkingLot = 1;
-        ParkingLotSet parkingLotSet = new ParkingLotSet(new ParkingLot(totalParkingPointsPerParkingLot),
+        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot(totalParkingPointsPerParkingLot),
                 new ParkingLot(totalParkingPointsPerParkingLot));
 
-        parkingLotSet.park(new Car());
+        parkingBoy.park(new Car());
 
-        assertThat(parkingLotSet.hasAvailableParkingPoints(), is(true));
+        assertThat(parkingBoy.hasAvailableParkingPoints(), is(true));
     }
 
     @Test
@@ -30,18 +30,18 @@ public class ParkingLotSetTest {
         ParkingLot parkingLotB = new ParkingLot(totalParkingPointsPerParkingLot);
         parkingLotB.park(new Car());
 
-        ParkingLotSet parkingLotSet = new ParkingLotSet(parkingLotA, parkingLotB);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotA, parkingLotB);
 
-        assertThat(parkingLotSet.hasAvailableParkingPoints(), is(false));
+        assertThat(parkingBoy.hasAvailableParkingPoints(), is(false));
     }
 
     @Test
     public void shouldReturnParkingTicketIfCouldPark() throws NoAvailableParkingPointException {
         int totalParkingPointsPerParkingLot = 1;
 
-        ParkingLotSet parkingLotSet = new ParkingLotSet(new ParkingLot(totalParkingPointsPerParkingLot), new ParkingLot(totalParkingPointsPerParkingLot));
+        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot(totalParkingPointsPerParkingLot), new ParkingLot(totalParkingPointsPerParkingLot));
 
-        ParkingTicket ticket = parkingLotSet.park(new Car());
+        ParkingTicket ticket = parkingBoy.park(new Car());
         assertThat(ticket, is(notNullValue()));
     }
 }
