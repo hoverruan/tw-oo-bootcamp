@@ -24,4 +24,8 @@ public class ParkingLot {
     public void pick(Car car) {
         availableParkingPoints++;
     }
+
+    public boolean hasAvailableParkingPoints() {
+        return availableParkingPoints > 0;
+    }
 }

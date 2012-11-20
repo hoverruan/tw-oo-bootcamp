@@ -9,7 +9,7 @@ import org.junit.Test;
  */
 public class ParkingLotSetTest {
     @Test
-    public void couldParkIfAnyParkingLotHasAvailableParkingPoints() {
+    public void couldParkIfAnyParkingLotHasAvailableParkingPoints() throws NoAvailableParkingPointException {
         int totalParkingPointsPerParkingLot = 1;
         ParkingLotSet parkingLotSet = new ParkingLotSet(new ParkingLot(totalParkingPointsPerParkingLot),
                 new ParkingLot(totalParkingPointsPerParkingLot));
@@ -17,5 +17,18 @@ public class ParkingLotSetTest {
         parkingLotSet.park(new Car());
 
         assertThat(parkingLotSet.hasAvailableParkingPoints(), is(true));
+    }
+
+    @Test
+    public void couldParkIfOneParkingLotHasAvailableParkingPoints() throws NoAvailableParkingPointException {
+        int totalParkingPointsPerParkingLot = 1;
+        ParkingLot parkingLotA = new ParkingLot(totalParkingPointsPerParkingLot);
+        parkingLotA.park(new Car());
+        ParkingLotSet parkingLotSet = new ParkingLotSet(parkingLotA,
+                new ParkingLot(totalParkingPointsPerParkingLot));
+
+        parkingLotSet.park(new Car());
+
+        assertThat(parkingLotSet.hasAvailableParkingPoints(), is(false));
     }
 }
