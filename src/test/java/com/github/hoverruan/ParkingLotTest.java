@@ -18,39 +18,35 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void shouldDecreaseTheAvailableParkingLotBy1WhenOneCarLeft() throws NoAvailableParkingPointException {
-        // given
-
-        // when
+    public void shouldDecreaseTheAvailableParkingLotByOneWhenOneCarLeft() throws NoAvailableParkingPointException {
         parkingLot.park(new Car());
 
-        // then
         assertThat(parkingLot.getAvailableParkingPoints(), is(TOTAL_PARKING_POINTS - 1));
     }
 
     @Test
     public void shouldRefuseIfNoAvailableParkingPointLeft() throws NoAvailableParkingPointException {
-        // given
-        parkingLot = parkingLotWithOneParkingPoint();
-        parkingLot.park(new Car());
+        parkingLot = zeroParkingLot();
 
-        // then
         assertThat(parkingLot.hasAvailableParkingPoints(), is(false));
     }
 
     @Test
-    public void shouldIncreaseTheAvailableParkingLotBy1WhenOneCarEnter() throws NoAvailableParkingPointException {
-        // given
+    public void shouldIncreaseTheAvailableParkingLotByOneWhenOneCarEnter() throws NoAvailableParkingPointException {
         parkingLot.park(new Car());
 
-        // when
+        assertThat(parkingLot.getAvailableParkingPoints(), is(TOTAL_PARKING_POINTS - 1));
+
         parkingLot.pick(new Car());
 
-        // then
         assertThat(parkingLot.getAvailableParkingPoints(), is(TOTAL_PARKING_POINTS));
     }
 
-    static ParkingLot parkingLotWithOneParkingPoint() {
+    static ParkingLot singleParkingLot() {
         return new ParkingLot(1);
+    }
+
+    static ParkingLot zeroParkingLot() {
+        return new ParkingLot(0);
     }
 }
