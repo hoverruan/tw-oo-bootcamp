@@ -28,14 +28,14 @@ public class ParkingLotTest {
         assertThat(parkingLot.getAvailableParkingPoints(), is(TOTAL_PARKING_POINTS - 1));
     }
 
-    @Test(expected = NoAvailableParkingPointException.class)
+    @Test
     public void shouldRefuseIfNoAvailableParkingPointLeft() throws NoAvailableParkingPointException {
         // given
-        parkingLot = new ParkingLot(1);
+        parkingLot = parkingLotWithOneParkingPoint();
         parkingLot.park(new Car());
 
-        // when
-        parkingLot.park(new Car());
+        // then
+        assertThat(parkingLot.hasAvailableParkingPoints(), is(false));
     }
 
     @Test
@@ -48,5 +48,9 @@ public class ParkingLotTest {
 
         // then
         assertThat(parkingLot.getAvailableParkingPoints(), is(TOTAL_PARKING_POINTS));
+    }
+
+    static ParkingLot parkingLotWithOneParkingPoint() {
+        return new ParkingLot(1);
     }
 }
