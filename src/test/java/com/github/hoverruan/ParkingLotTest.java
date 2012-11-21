@@ -26,7 +26,7 @@ public class ParkingLotTest {
 
     @Test
     public void shouldRefuseIfNoAvailableParkingPointLeft() throws NoAvailableParkingPointException {
-        parkingLot = zeroParkingLot();
+        parkingLot = parkingLotWithZeroPoints();
 
         assertThat(parkingLot.hasAvailableParkingPoints(), is(false));
     }
@@ -42,11 +42,11 @@ public class ParkingLotTest {
         assertThat(parkingLot.getAvailableParkingPoints(), is(TOTAL_PARKING_POINTS));
     }
 
-    static ParkingLot singleParkingLot() {
+    static ParkingLot parkingLotWithOnePoints() {
         return new ParkingLot(1);
     }
 
-    static ParkingLot zeroParkingLot() {
+    static ParkingLot parkingLotWithZeroPoints() {
         return new ParkingLot(0);
     }
 }
